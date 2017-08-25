@@ -59,37 +59,38 @@ colnames <- names(mazda2)
 i <- 1
 for (col in colnames){
   colname <- parse(text = paste0("mazda2$",col))
-  if(class(eval(colname))=="integer"){
+  if(class(eval(colname))=="integer" || class(eval(colname))=="numeric"){
+    print(col)
     descriptivo[i,"Variable"] <- col
     descriptivo[i,"tipoVariable"] <- "integer"
     descriptivo[i,"Min"] <- min(eval(colname))
     descriptivo[i,"Mediana"] <- median(eval(colname))
     descriptivo[i,"Media"] <- mean(eval(colname))
     descriptivo[i,"Max"] <- max(eval(colname))
-    descriptivo[i,"Q5"] <- quantile(eval(colname), c(0.05))  
-    descriptivo[i,"Q10"] <- quantile(eval(colname), c(0.1))
-    descriptivo[i,"Q25"] <- quantile(eval(colname), c(0.25))  
-    descriptivo[i,"Q50"] <- quantile(eval(colname), c(0.5))  
-    descriptivo[i,"Q75"] <- quantile(eval(colname), c(0.75))
-    descriptivo[i,"Q90"] <- quantile(eval(colname), c(0.9))
-    descriptivo[i,"Q95"] <- quantile(eval(colname), c(0.95))
+    descriptivo[i,"Q5"] <- quantile(eval(colname), c(0.05), na.rm = TRUE)  
+    descriptivo[i,"Q10"] <- quantile(eval(colname), c(0.1), na.rm = TRUE)
+    descriptivo[i,"Q25"] <- quantile(eval(colname), c(0.25), na.rm = TRUE)  
+    descriptivo[i,"Q50"] <- quantile(eval(colname), c(0.5), na.rm = TRUE)  
+    descriptivo[i,"Q75"] <- quantile(eval(colname), c(0.75), na.rm = TRUE)
+    descriptivo[i,"Q90"] <- quantile(eval(colname), c(0.9), na.rm = TRUE)
+    descriptivo[i,"Q95"] <- quantile(eval(colname), c(0.95), na.rm = TRUE)
     descriptivo[i,"Porc_Nulos"] <- sum(is.na(eval(colname))==TRUE)/length(eval(colname))
     descriptivo[i,"Cant_Nulos"] <- sum(is.na(eval(colname))==TRUE)
     descriptivo[i,"Total"] <- length(eval(colname))
   }
   
   if(class(eval(colname))=="character"){
-    #print(sort(unique(eval(colname))))
-    col <- "estadocivil"
+    print(col)
+    
     etiquetas <- sort(unique(eval(colname)))
     #length(etiquetas)
     maet <- data.frame(ETIQUETA=NULL)
+    
     for (j in 1:length(etiquetas))
       maet[j,"ETIQUETA"] <- str_trim(etiquetas[j])
     
-    print(maet)
+    #print(maet)
     tmp <-eval(colname)
-    
     
     for (x in 1:length(tmp)){
       for (j in 1:length(maet$ETIQUETA)){
@@ -102,8 +103,8 @@ for (col in colnames){
     
     tmp1 <- as.data.frame(tmp)
     names(tmp1) <- paste(col,"_r",sep="")
-    compradoras_general <- cbind(compradoras_general,tmp1)
-    
+    mazda2 <- cbind(mazda2,tmp1)
+   
     descriptivo[i,"Variable"] <- col
     descriptivo[i,"tipoVariable"] <- "character"
     descriptivo[i,"Min"] <- min(eval(colname))
@@ -125,7 +126,6 @@ for (col in colnames){
   }
   i <- i + 1  
 }
-
 
 
 

@@ -119,13 +119,75 @@ all_data["Traccion"] <- NA
 all_data["Transmision"] <- NA
 all_data["Vidrios"] <- NA
 
+
+#Seguridad
+##Alarma con control 
+##Asegurado 
+##Rastreo satelital
+
+all_data["AlarmaControl"] <- NA
+all_data["Asegurado"] <- NA
+all_data["RastreoSatelital"] <- NA
+
+#Sonido
+##Caja de CD's 
+##DVD 
+##Planta 
+##Sub-Buffer (Bajos)
+
+all_data["CD"] <- NA
+all_data["DVD"] <- NA
+all_data["Planta"] <- NA
+all_data["Buffer"] <- NA
+
+#Exterior
+##Estribos 
+##Forro llanta de repuesto 
+##Llantas nuevas 
+##Luces anti niebla 
+##Película de Seguridad 
+##Retrovisores eléctricos 
+##Revision tecnomecánica 
+##Rines de lujo 
+##Spoiler 
+##Sun Roof (Quemacoco)
+
+all_data["Estribos"] <- NA
+all_data["ForroLlantaRepuesto"] <- NA
+all_data["LlantasNuevas"] <- NA
+all_data["LucesAntiNiebla"] <- NA
+all_data["PeliculaSeguridad"] <- NA
+all_data["RetrovisoresElectricos"] <- NA
+all_data["ReVTecnicoMecanica"] <- NA
+all_data["RinesLujo"] <- NA
+all_data["Spoiler"] <- NA
+all_data["SunRoof"] <- NA
+
+
+#Equipamiento
+##Bloqueo central 
+##Forro del volante 
+##Forros de asientos 
+##Volante deportivo
+
+all_data["BloqueoCentral"] <- NA
+all_data["ForroVolante"] <- NA
+all_data["ForroAsientos"] <- NA
+all_data["VolanteDeportivo"] <- NA
+
+
 for(i in 1:length(all_data$Id))
 {
   url <- as.character(all_data[i,"URL"])
+  #url <-'http://articulo.tucarro.com.co/MCO-454409780-mazda-mazda-2-_JM'
+  #url <- 'http://articulo.tucarro.com.co/MCO-451857284-mazda-mazda-2-_JM'
   webpage <- read_html(url)
   details_data_html <- html_nodes(webpage,'.attribute-group')
-  details_data <- strsplit(str_replace_all(str_replace_all(html_text(details_data_html),"\t",""),"\n",""),":")
+  second_data_hml <- html_nodes(webpage,'.attribute-list')
 
+  details_data <- strsplit(str_replace_all(str_replace_all(html_text(details_data_html),"\t",""),"\n",""),":")
+  second_data <- unlist(strsplit(str_trim(str_replace_all(html_text(second_data_hml),"\n","")),"\t"))
+ 
   for (j in 1:length(details_data))
   {
     if(unlist(details_data[j])[1] == "Color")
@@ -139,14 +201,14 @@ for(i in 1:length(all_data$Id))
     
     if(unlist(details_data[j])[1] == "Modelo")
       all_data[i,"Modelo"] <- str_trim(unlist(details_data[j])[2]) 
-    if(unlist(details_data[j])[1] == "?nico due?o")
+    if(unlist(details_data[j])[1] == "Único dueño")
       all_data[i,"Unico"] <- str_trim(unlist(details_data[j])[2]) 
     if(unlist(details_data[j])[1] == "Placa")
       all_data[i,"Placa"] <- str_trim(unlist(details_data[j])[2]) 
-    if(unlist(details_data[j])[1] == "A?o")
+    if(unlist(details_data[j])[1] == "Año")
       all_data[i,"Anyo"] <- str_trim(unlist(details_data[j])[2]) 
     
-    if(unlist(details_data[j])[1] == "Versi?n")
+    if(unlist(details_data[j])[1] == "Versión")
       all_data[i,"Version"] <- str_trim(unlist(details_data[j])[2])   
     if(unlist(details_data[j])[1] == "Frenos ABS")
       all_data[i,"FrenosABS"] <- str_trim(unlist(details_data[j])[2]) 
@@ -159,7 +221,7 @@ for(i in 1:length(all_data$Id))
       all_data[i,"Asientos"] <- str_trim(unlist(details_data[j])[2])   
     if(unlist(details_data[j])[1] == "Nro. de cilindros")
       all_data[i,"Cilindros"] <- str_trim(unlist(details_data[j])[2])  
-    if(unlist(details_data[j])[1] == "Direcci?n")
+    if(unlist(details_data[j])[1] == "Dirección")
       all_data[i,"Direccion"] <- str_trim(unlist(details_data[j])[2])   
     if(unlist(details_data[j])[1] == "Doy financiamiento")
       all_data[i,"Financiamiento"] <- str_trim(unlist(details_data[j])[2])  
@@ -168,21 +230,69 @@ for(i in 1:length(all_data$Id))
       all_data[i,"Motor"] <- str_trim(unlist(details_data[j])[2])   
     if(unlist(details_data[j])[1] == "Negociable")
       all_data[i,"Negociable"] <- str_trim(unlist(details_data[j])[2]) 
-    if(unlist(details_data[j])[1] == "Motor reci?n reparado")
+    if(unlist(details_data[j])[1] == "Motor recién reparado")
       all_data[i,"MotorReparado"] <- str_trim(unlist(details_data[j])[2]) 
     if(unlist(details_data[j])[1] == "Sonido")
       all_data[i,"Sonido"] <- str_trim(unlist(details_data[j])[2]) 
     
-    if(unlist(details_data[j])[1] == "Tracci?n")
+    if(unlist(details_data[j])[1] == "Tracción")
       all_data[i,"Traccion"] <- str_trim(unlist(details_data[j])[2])  
-    if(unlist(details_data[j])[1] == "Transmisi?n")
+    if(unlist(details_data[j])[1] == "Transmisión")
       all_data[i,"Transmision"] <- str_trim(unlist(details_data[j])[2]) 
     if(unlist(details_data[j])[1] == "Vidrios")
       all_data[i,"Vidrios"] <- str_trim(unlist(details_data[j])[2]) 
-  }
+  } 
+  if(!is.null(second_data))
+    for (j in 1:length(second_data))
+    { 
+      if(second_data[j] == "Alarma con control")
+        all_data[i,"AlarmaControl"] <- 1
+      if(second_data[j] == "Asegurado")
+        all_data[i,"Asegurado"] <- 1
+      if(second_data[j] == "Rastreo satelital")  
+        all_data[i,"RastreoSatelital"] <- 1
+      if(second_data[j] == "Caja de CD's")
+        all_data[i,"CD"] <- 1
+      if(second_data[j] == "DVD")
+        all_data[i,"DVD"] <- 1
+      if(second_data[j] == "Planta")
+        all_data[i,"Planta"] <- 1
+      if(second_data[j] == "Sub-Buffer (Bajos)")
+        all_data[i,"Buffer"] <- 1
+      if(second_data[j] == "Estribos")
+        all_data[i,"Estribos"] <- 1
+      if(second_data[j] == "Forro llanta de repuesto")
+        all_data[i,"ForroLlantaRepuesto"] <- 1
+      if(second_data[j] == "Llantas nuevas")
+        all_data[i,"LlantasNuevas"] <- 1
+      if(second_data[j] == "Luces anti niebla")
+        all_data[i,"LucesAntiNiebla"] <- 1
+      if(second_data[j] == "Película de Seguridad")
+        all_data[i,"PeliculaSeguridad"] <- 1
+      if(second_data[j] == "Retrovisores eléctricos")
+        all_data[i,"RetrovisoresElectricos"] <- 1
+      if(second_data[j] == "Revision tecnomecánica")
+        all_data[i,"ReVTecnicoMecanica"] <- 1
+      if(second_data[j] == "Rines de lujo")
+        all_data[i,"RinesLujo"] <- 1
+      if(second_data[j] == "Spoiler")
+        all_data[i,"Spoiler"] <- 1
+      if(second_data[j] == "Sun Roof (Quemacoco)")
+        all_data[i,"SunRoof"] <- 1
+      if(second_data[j] == "Bloqueo central")
+        all_data[i,"BloqueoCentral"] <- 1
+      if(second_data[j] == "Forro del volante")
+        all_data[i,"ForroVolante"] <- 1
+      if(second_data[j] == "Forros de asientos")
+        all_data[i,"ForroAsientos"] <- 1
+      if(second_data[j] == "Volante deportivo")
+        all_data[i,"VolanteDeportivo"] <- 1     
+    }
 }
 all_data$fecha_grabacion <- Sys.Date()
 
+fecha <- format(Sys.Date(),"%Y%m%d")
+
 write.table(all_data, 
-            paste(dir.output,"Datos_Mazda2.csv",sep=''),
+            paste(dir.output,"Datos_Mazda2_",fecha,'.csv',sep=''),
             sep="|", col.names=TRUE, row.names=FALSE, quote=TRUE, na="",dec=',',fileEncoding = "UTF-8")
