@@ -29,7 +29,8 @@ for(f in funciones) source(f)
 # --------------------------------------------------------------------------#
 #                            MAZDA2
 # --------------------------------------------------------------------------#
-system.time(mazda2 <- fread(paste(dir.output,'Datos_Mazda2_20170818.csv',sep=''),sep = "|",encoding="UTF-8",head=T, na.strings=c("NULL","",NA,NULL)))
+system.time(mazda2 <- fread(paste(dir.output,'Datos_Mazda2_20170826.csv',sep=''),sep = "|",encoding="UTF-8",head=T, na.strings=c("NULL","",NA,NULL)))
+system.time(divipola <- fread(paste(dir.input,'departamento.csv',sep=''),sep = ",",encoding="UTF-8",head=T, na.strings=c("NULL","",NA,NULL)))
 # --------------------------------------------------------------------------#
 #                     ELIMINAR CAMPOS NO NECESARIOS
 # --------------------------------------------------------------------------#
@@ -128,14 +129,14 @@ for (col in colnames){
 }
 
 
+unique(mazda2$Ubicacion)
 
 
 
 
 
 
-
-#tableplot(compradoras_general,cex = 1.8)
+#tableplot(mazda2,cex = 1.8)
 #summary(mazda2)
 
 #hist(AirPassengers, 

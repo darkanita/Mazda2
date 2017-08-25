@@ -48,7 +48,7 @@ while (i<=total_data){
   price_data_html <- html_nodes(webpage,'.ch-price')
   model_data_html <- html_nodes(webpage,'.destaque')
   site_data_html <- html_nodes(webpage,'.more-info')
-  
+
   #Results
   result_data_html <- str_replace_all(html_text(html_nodes(webpage,'.page'),'.fromPage'),"\t"," ")
   result_data_html <- str_trim(result_data_html)
@@ -73,6 +73,9 @@ while (i<=total_data){
   
   i <- as.integer(unlist(strsplit(range_data,":"))[2]) + 1
   url <- html_attr(html_children(pag_data_html), "href", default = NA_character_)
+  
+  if(length(price_data)!=length(title_data))
+     price_data <- price_data[-1]
     
   data <- data.frame(
                       Id=id_data,
@@ -83,10 +86,8 @@ while (i<=total_data){
                       Ubicacion=site_data,
                       URL=url_data_html
                     )
-  
-  all_data <- rbind(all_data,data)
-  
-  
+ 
+   all_data <- rbind(all_data,data)
 }
 
 #Adicionar Columnas 
@@ -94,6 +95,10 @@ all_data["Color"] <- NA
 all_data["Combustible"] <- NA
 all_data["Recorrido"] <- NA
 all_data["Marca"] <- NA
+
+all_data["Departamento"] <- NA
+all_data["Ciudad"] <- NA
+all_data["Barrio"] <- NA
 
 all_data["Modelo"] <- NA
 all_data["Unico"] <- NA
@@ -163,7 +168,6 @@ all_data["RinesLujo"] <- NA
 all_data["Spoiler"] <- NA
 all_data["SunRoof"] <- NA
 
-
 #Equipamiento
 ##Bloqueo central 
 ##Forro del volante 
@@ -182,12 +186,15 @@ for(i in 1:length(all_data$Id))
   #url <-'http://articulo.tucarro.com.co/MCO-454409780-mazda-mazda-2-_JM'
   #url <- 'http://articulo.tucarro.com.co/MCO-451857284-mazda-mazda-2-_JM'
   webpage <- read_html(url)
+  
   details_data_html <- html_nodes(webpage,'.attribute-group')
   second_data_hml <- html_nodes(webpage,'.attribute-list')
-
+  detail_ubicacion_html <- strsplit(str_replace_all(str_replace_all(html_text(html_children(html_nodes(webpage,'.vip-location-info'))),"\t",""),"\n",""),":")
+  
   details_data <- strsplit(str_replace_all(str_replace_all(html_text(details_data_html),"\t",""),"\n",""),":")
   second_data <- unlist(strsplit(str_trim(str_replace_all(html_text(second_data_hml),"\n","")),"\t"))
- 
+  detail_ubicacion <- unlist(strsplit(as.character(detail_ubicacion_html[2]),"-"))
+  
   for (j in 1:length(details_data))
   {
     if(unlist(details_data[j])[1] == "Color")
@@ -288,7 +295,18 @@ for(i in 1:length(all_data$Id))
       if(second_data[j] == "Volante deportivo")
         all_data[i,"VolanteDeportivo"] <- 1     
     }
+  if(!is.null(detail_ubicacion))
+    for (j in 1:length(detail_ubicacion))
+    { 
+      if(j==1)
+        all_data[i,"Departamento"] <- detail_ubicacion[j] 
+      if(j==2)
+        all_data[i,"Ciudad"] <- detail_ubicacion[j] 
+      if(j==3)
+        all_data[i,"Barrio"] <- detail_ubicacion[j] 
+    }
 }
+
 all_data$fecha_grabacion <- Sys.Date()
 
 fecha <- format(Sys.Date(),"%Y%m%d")

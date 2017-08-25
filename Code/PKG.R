@@ -37,3 +37,40 @@ suppressPackageStartupMessages(require(tabplot))
 if(!require(compiler))
   install.packages('compiler')
 suppressPackageStartupMessages(require(compiler))
+#devtools
+if(!require(devtools))
+  install.packages('devtools')
+suppressPackageStartupMessages(require(devtools))
+#maptools
+if(!require(maptools))
+  install.packages('maptools')
+suppressPackageStartupMessages(require(maptools))
+#rgeos
+if(!require(rgeos))
+  install.packages('rgeos')
+suppressPackageStartupMessages(require(rgeos))
+#tidyverse
+if(!require(tidyverse))
+  install.packages('tidyverse')
+suppressPackageStartupMessages(require(tidyverse))
+#rgdal
+if(!require(rgdal))
+  install.packages('rgdal')
+suppressPackageStartupMessages(require(rgdal))
+#ggthemes
+if(!require(ggthemes))
+  install.packages('ggthemes')
+suppressPackageStartupMessages(require(ggthemes))
+#ggmap
+if(!require(ggmap))
+  install.packages('ggmap')
+suppressPackageStartupMessages(require(ggmap))
+#raster
+if(!require(raster))
+  install.packages('raster')
+suppressPackageStartupMessages(require(raster))
+
+#dplyr
+
+
+

@@ -125,7 +125,6 @@ DELETE01 <- function(mazda2=mazda2)
       mazda2[i,"Precio"] <- 0
     }
   } 
-  
   mazda2$Precio<-as.numeric(mazda2$Precio)
   mazda2$Unico<-as.integer(mazda2$Unico)
   mazda2$FrenosABS<-as.integer(mazda2$FrenosABS)
