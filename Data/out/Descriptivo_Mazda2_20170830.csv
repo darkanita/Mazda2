@@ -1,0 +1,48 @@
+"Variable"|"tipoVariable"|"Min"|"Mediana"|"Media"|"Max"|"Q5"|"Q10"|"Q25"|"Q50"|"Q75"|"Q90"|"Q95"|"Porc_Nulos"|"Cant_Nulos"|"Total"
+"Precio"|"integer"|"0"|"31000000"|"34187477.0206022"|"59900000"|"23000000"|"24500000"|"27000000"|"31000000"|"39100000"|"49900000"|"52510000"|0|0|631
+"Modelo_anyo"|"integer"|"2008"|"2012"|"2012.81933438986"|"2018"|"2009"|"2009"|"2011"|"2012"|"2015"|"2017"|"2017"|0|0|631
+"Ubicacion"|"character"|"Antioquia"|"Bogotá D.c."|"Boyaca"|"Valle Del Cauca"|"Antioquia"|"Antioquia"|"Antioquia"|"Bogotá D.c."|"Bogotá D.c."|"Risaralda"|"Valle Del Cauca"|0|0|631
+"Color"|"character"|"Azul"|"Gris"|"Gris"|"Vinotinto"|"Azul"|"Blanco"|"Blanco"|"Gris"|"Plateado"|"Rojo"|"Rojo"|0|0|631
+"Combustible"|"character"||"Gasolina"|"Gasolina"||"Gasolina"|"Gasolina"|"Gasolina"|"Gasolina"|"Gasolina"|"Gasolina"|"Gasolina"|0,231378763866878|146|631
+"Recorrido"|"integer"|"0"|"52000"|"212986.324881141"|"99999999"|"0"|"7000"|"28000"|"52000"|"76000"|"96000"|"110306"|0|0|631
+"Departamento"|"character"|"Antioquia "|"Bogotá D.c."|"Boyaca"|"Valle Del Cauca "|"Antioquia"|"Antioquia"|"Antioquia"|"Bogotá D.c."|"Bogotá D.c."|"Risaralda"|"Valle Del Cauca"|0|0|631
+"Ciudad"|"character"|" Aguachica"|"Medellín"|"Kennedy"|" Yopal"|"Bello"|"Bogota"|"Cali"|"Medellín"|"Pereira"|"Suba"|"Usaquén"|0|0|631
+"Barrio"|"character"||"Gratamira"|"La Calleja"||"Altos del Poblado"|"Belén Loma de los Bernal"|"Chapinero Alto"|"Gratamira"|"Normandía"|"San Pedro"|"Teusaquillo"|0,45324881141046|286|631
+"Unico"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,396196513470681|250|631
+"Placa"|"character"|"-"|"INQ373"|"IOV073"|"ZZY-789"|"***-**9"|"000000"|"ddm433"|"INQ373"|"NBT800"|"RNY248"|"UUM-551"|0|0|631
+"Version"|"character"||"HB"|"mazda 2"||"AT 1500CC"|"FULL EQUIPO"|"Grand Turing"|"HB"|"Sedan"|"Touring"|"TOURING"|0,540412044374009|341|631
+"FrenosABS"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,304278922345483|192|631
+"Aire"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,223454833597464|141|631
+"Airbag"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,232963549920761|147|631
+"Asientos"|"character"||"Tela"|"Semi-cuero"||"Cuero"|"Cuero"|"Cuero"|"Tela"|"Tela"|"Tela"|"Tela"|0,220285261489699|139|631
+"Cilindros"|"character"||"4"|"4 Cilindros"||"2000"|"4"|"4"|"4"|"4, 16 VALVULAS"|"4L"|"4L"|0,684627575277338|432|631
+"Direccion"|"character"|"Asistida"|"Hidráulica"|"Asistida"|"Otro"|"Asistida"|"Asistida"|"Hidráulica"|"Hidráulica"|"Hidráulica"|"Hidráulica"|"Hidráulica"|0|0|631
+"Financiamiento"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,402535657686212|254|631
+"Motor"|"character"||"1500"|"1498 turbo"||"1.5"|"1496"|"1500"|"1500"|"1500"|"1500"|"1500cc"|0,282091917591125|178|631
+"Negociable"|"integer"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"MotorReparado"|"integer"|||||"0"|"0"|"0"|"0"|"0"|"0"|"0"|0,516640253565769|326|631
+"Sonido"|"character"||"MP3"|"CD"||"CD"|"CD"|"MP3"|"MP3"|"MP3"|"MP3"|"MP3"|0,290015847860539|183|631
+"Traccion"|"character"||"4x2"|"4x2"||"4x2"|"4x2"|"4x2"|"4x2"|"4x2"|"4x2"|"4x2"|0,565768621236133|357|631
+"Transmision"|"character"|"Automática"|"Automática"|"Automática"|"Mecánica"|"Automática"|"Automática"|"Automática"|"Automática"|"Mecánica"|"Mecánica"|"Mecánica"|0|0|631
+"Vidrios"|"character"||"Eléctricos"|"Eléctricos"||"Eléctricos"|"Eléctricos"|"Eléctricos"|"Eléctricos"|"Eléctricos"|"Eléctricos"|"Eléctricos"|0,247226624405705|156|631
+"AlarmaControl"|"integer"|"0"|"1"|"0.587955625990491"|"1"|"0"|"0"|"0"|"1"|"1"|"1"|"1"|0|0|631
+"Asegurado"|"integer"|"0"|"0"|"0.232963549920761"|"1"|"0"|"0"|"0"|"0"|"0"|"1"|"1"|0|0|631
+"RastreoSatelital"|"integer"|"0"|"0"|"0.00792393026941363"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"CD"|"integer"|"0"|"0"|"0.0776545166402536"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"1"|0|0|631
+"DVD"|"integer"|"0"|"0"|"0.063391442155309"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"1"|0|0|631
+"Planta"|"integer"|"0"|"0"|"0.01743264659271"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"Buffer"|"integer"|"0"|"0"|"0.0206022187004754"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"Estribos"|"integer"|"0"|"0"|"0.0427892234548336"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"ForroLlantaRepuesto"|"integer"|"0"|"0"|"0.0206022187004754"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"LlantasNuevas"|"integer"|"0"|"0"|"0.256735340729002"|"1"|"0"|"0"|"0"|"0"|"1"|"1"|"1"|0|0|631
+"LucesAntiNiebla"|"integer"|"0"|"0"|"0.469096671949287"|"1"|"0"|"0"|"0"|"0"|"1"|"1"|"1"|0|0|631
+"PeliculaSeguridad"|"integer"|"0"|"0"|"0.483359746434231"|"1"|"0"|"0"|"0"|"0"|"1"|"1"|"1"|0|0|631
+"RetrovisoresElectricos"|"integer"|"0"|"1"|"0.527733755942948"|"1"|"0"|"0"|"0"|"1"|"1"|"1"|"1"|0|0|631
+"ReVTecnicoMecanica"|"integer"|"0"|"0"|"0.259904912836767"|"1"|"0"|"0"|"0"|"0"|"1"|"1"|"1"|0|0|631
+"RinesLujo"|"integer"|"0"|"1"|"0.51188589540412"|"1"|"0"|"0"|"0"|"1"|"1"|"1"|"1"|0|0|631
+"Spoiler"|"integer"|"0"|"0"|"0.256735340729002"|"1"|"0"|"0"|"0"|"0"|"1"|"1"|"1"|0|0|631
+"SunRoof"|"integer"|"0"|"0"|"0.0158478605388273"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"BloqueoCentral"|"integer"|"0"|"1"|"0.602218700475436"|"1"|"0"|"0"|"0"|"1"|"1"|"1"|"1"|0|0|631
+"ForroVolante"|"integer"|"0"|"0"|"0.05229793977813"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"1"|0|0|631
+"ForroAsientos"|"integer"|"0"|"0"|"0.0253565768621236"|"1"|"0"|"0"|"0"|"0"|"0"|"0"|"0"|0|0|631
+"VolanteDeportivo"|"integer"|"0"|"0"|"0.164817749603803"|"1"|"0"|"0"|"0"|"0"|"0"|"1"|"1"|0|0|631
