@@ -156,6 +156,7 @@ DELETE01 <- function(mazda2=mazda2)
   mazda2$ForroVolante<-as.integer(mazda2$ForroVolante)
   mazda2$Asegurado<-as.integer(mazda2$Asegurado)
   
+  #names(mazda2)
   # ELIMINAMOS VARIABLES NO NECESARIAS EN PROCESO DE MODELAMIENTO
   mazda2[,Id:=NULL]
   mazda2[,Titulo:=NULL]
@@ -168,6 +169,9 @@ DELETE01 <- function(mazda2=mazda2)
   #mazda2[,Combustible:=NULL]
   #mazda2[,Recorrido:=NULL]
   mazda2[,Marca:=NULL]
+  #mazda2[,Departamento:=NULL]
+  #mazda2[,Ciudad:=NULL]
+  #mazda2[,Barrio:=NULL]  
   mazda2[,Modelo:=NULL]
   #mazda2[,Unico:=NULL]
   mazda2[,Anyo:=NULL]

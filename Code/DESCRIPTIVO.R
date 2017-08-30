@@ -128,8 +128,13 @@ for (col in colnames){
   i <- i + 1  
 }
 
+fecha <- format(Sys.Date(),"%Y%m%d")
+write.table(descriptivo, 
+            paste(dir.output,"Descriptivo_Mazda2_",fecha,'.csv',sep=''),
+            sep="|", col.names=TRUE, row.names=FALSE, quote=TRUE, na="",dec=',',fileEncoding = "UTF-8")
 
-unique(mazda2$Ubicacion)
+
+#unique(mazda2$Ubicacion)
 
 
 
