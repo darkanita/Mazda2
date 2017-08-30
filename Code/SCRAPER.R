@@ -28,6 +28,8 @@ source(list.files(pattern = "PKG"))
 # --------------------------------------------------------------------------#
 #URL 
 url <- 'http://carros.tucarro.com.co/carros-camionetas/mazda/mazda-2/'
+#url <- 'http://carros.tucarro.com.co/carros-camionetas/renault/clio/'
+
 #Leyendo Codigo HTML
 webpage <- read_html(url)
 #Capturar Cantidad de Resultados.
@@ -76,7 +78,8 @@ while (i<=total_data){
   
   if(length(price_data)!=length(title_data))
      price_data <- price_data[-1]
-    
+  
+  #if(url!='http://carros.tucarro.com.co/carros-camionetas/renault/clio/_Desde_201' | url!='http://carros.tucarro.com.co/carros-camionetas/renault/clio/_Desde_101')  
   data <- data.frame(
                       Id=id_data,
                       Titulo=title_data,

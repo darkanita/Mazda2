@@ -1,0 +1,219 @@
+\documentclass[a4paper]{article}
+
+%% Setup idioma
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+%% Setup tamaño de página y márgenes
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Paquetes útiles
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Trabajo 1 Modelos Lineales}
+\author{Ana María López Pedro Pablo Villegas}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+El presente trabajo los resultados del mazda 2 publicado en la página https://www.tucarro.com.co consultados el 18 de agosto de 2017.\\
+En total se consultaron 631 registros de Mazda 2 nuevos y usados con 28 variables cada uno
+\end{abstract}
+
+\section{Introducción}
+
+Se descarcaron los datos de la página https://www.tucarro.com.co y se obtuvieron 
+
+\section{Objetivos}
+Construir un modelo para determinar el precio de oferta de un vehículo Mazda 2 con base en información publicada en internet.
+
+\section{Metodología}
+
+\section{Desarrollo}
+
+\subsection{Recolección de Datos}
+La página web https://www.tucarro.com.co es hace parte de la plataforma MercadoLibre y es propiedad de la empresa MercadoLibre Colombia limitada; por lo tanto las publicaciones en tucarro.com.co obedecen las mismas reglas de negocio que mercadolibre.com.co. pero especializados en vehículos (motos, automóviles, camionetas, camiones, maquinaria pesada, carros de colección y vehículos náuticos) de todas las marcas, precios y años. \\
+
+\subsection{Análisis de Datos}
+Dado que las publicaciones siguen la lógica de MercadoLibre, son publicaciones libres que no son controladas y verificadas y sólo se solicita que las personas que deseen publicar algún vehículo diligencien ciertos campos predefinidos. Éstos son:\\
+
+\begin{itemize}
+\item Precio: Representa el valor de oferta del vehículo. La página permite que se publique en pesos o dólares (variable continua)
+\item Modelo/Año: Representa el modelo del vehículo (variable discreta ordinal)
+\item Ubicación: Representa el lugar dónde se ofrece el vehículo. La ubicación está compuesta por tres campos predefinidos:
+\begin{itemize}
+\item Departamento (variable discreta nominal)
+\item Ciudad (variable discreta nominal)
+\item Barrio (variable discreta nominal)
+\end{itemize}
+\item Color: Representa el color del vehículo. Es un campo con 16 opciones de colores preestablecidos (variable discreta nominal)
+\item Combustible: Representa la clase de combustible que usa el vehículo; hay tres opciones, diesel, gasolina, o gasolina y gas (variable discreta nominal)
+\item Recorrido: Representa los kilómetros recorridos por los vehículos ofertados, si el valor es cero se entiende que es un vehículo nuevo (variable continua)
+\item Único dueño: Campo donde se indica si el vehículo ha tenido más de un solo dueño, sólo hay dos opciones, si o no (variable binomial)
+\item Versión: Representa la versión del vehículo; si es una versión especial, full o sencilla. Es un campo libre que admite cualquier valor (variable discreta nominal)
+\item Frenos ABS: Representa si el vehículo tiene frenos ABS, sólo hay dos opciones, si o no (variable binomial)
+\item Aire: Representa si el vehículo tiene aire acondicionado, sólo hay dos opciones, si o no (variable binomial)
+\item Airbag: Representa si el vehículo cuenta con airbags, sólo hay dos opciones, si o no (variable binomial)
+\item Asientos: Representa el material con el que están tapizados los asientos del vehículo, hay tres opciones: cuero, semi-cuero y tela (variable discreta nominal)
+\item Cilindros: Representa el número de cilindros del motor. Es un campo libre que solo acepta valores numéricos (variable continua)
+\item Financiamiento: Representa el si el vendedor ofrece opciones de financiamiento, sólo hay dos opciones, si o no (variable binomial)
+\item Motor: Representa el tipo de motor del vehículo, es un campo libre (variable discreta nominal)
+\item Motor Reparado: Indica si el motor ha sido reparado últimamente, sólo hay dos opciones, si o no (variable binomial)
+\item Sonido: Representa el tipo de sonido que tiene el vehículo, hay cuatro opciones, CD, MP3, No y R/Rep (variable discreta nominal)
+\item Tracción: Representa la tracción del vehículo, sólo hay dos opciones, 4x4 o 4x2 (variable binomial)
+\item Transmisión: Representa el tipo de transmisión del vehículo, sólo hay dos opciones, Automática o Mecánica (variable binomial)
+\item Vidrios: Representa el tipo de vidrios que tiene el vehículo, sólo hay dos opciones, Eléctricos o Manuales (variable binomial)
+\item Seguridad: Representa el tipo de seguridad que tiene el vehículo. Es un grupo conformado por tres variables (si o no) cada una:
+\begin{itemize}
+\item Alarma con Control (variable binomial)
+\item Asegurado (variable binomial)
+\item Rastreo Satelital (variable binomial)
+\end{itemize}
+\item Placa: Representa el número de placa del vehículo. Es un campo libre (variable discreta nominal)
+\item Equipamiento: Representa el tipo de equipamiento adicional con que cuenta el vehículo. Es un grupo conformado por cuatro variables (si o no) cada una:
+\begin{itemize}
+\item Bloqueo Central (variable binomial)
+\item Forro del Volante (variable binomial)
+\item Forro de Asientos (variable binomial)
+\item Volante Deportivo (variable binomial)
+\end{itemize}
+\item Sonido:Representa los elementos adicionales de sonido con que cuenta el vehículo. Es un grupo compuesto por cuatro variables (si o no) cada una:
+\begin{itemize}
+\item Caja de CD's (variable binomial)
+\item DVD (variable binomial)
+\item Planta (variable binomial)
+\item Sub-Buffer (variable binomial)
+\end{itemize}
+\item Exterior: Representa los elementos decorativos adicionales con que cuenta el vehículo. Es un grupo compuesto por diez variables (si o no) cada una:
+\begin{itemize}
+\item Estribos (variable binomial)
+\item Forro Llanta de Repuesto (variable binomial)
+\item Llantas Nuevas (variable binomial)
+\item Luces Anti Niebla (variable binomial)
+\item Película de Seguridad (variable binomial)
+\item Retrovisores Eléctricos (variable binomial)
+\item Revisión Tecnicomecánica (variable binomial)
+\item Rines de Lujo (variable binomial)
+\item Spoiler (variable binomial)
+\item Sun Roof (variable binomial)
+\end{itemize}
+\end{itemize}
+Como se observa, la base de datos descargada de la página web cuenta con cuarenta y cuatro variables, de las cuales sólo tres son continuas, treinta son binomiales y once son discretas nominales. Adicionalmente, del total de variables,  sólo nueve (precio, modelo, ciudad, departamento, barrio, color, recorrido, transmisión y placa) son obligatorias, por lo que se presenta gran cantidad de datos faltantes en las no obligatorias.\\
+
+Otro paso importante para el análisis de datos, fue cruzar la información descargada de la tucarro.com.co con las fichas técnicas de los diferentes modelos de Mazda 2 que se han comercializado en Colombia y observamos que el vehículo sólo se vende desde el 2008, todos los modelos y referencias son a gasolina, tracción 4x2, vidrios eléctricos, radio con MP3 y que cada modelo tiene la opción de ser automático o mecánico.\\
+
+Algo que también se identificó fue que han habido tres generaciones de Mazda 2. La primera generación ha sido la única con referencias Sedan y abarca los modelos desde el 2008 hasta 2011 para las referencias Hatchback y desde el 2011 hasta el 2015 para las referencias Sedan. La segunda generación abarca los modelos desde el 2011 hasta el 2015. La tercera y última generación de Mazda 2 comprende las referencias 2016, 2017 y 2018.
+
+\subsubsection{Selección de variables}
+Como se mencionó anteriormente, sólo 9 de las 44 variables son obligatorias, por lo que se presentan datos faltantes superiores al 70\% en todas las variables no obligatorias por lo que se decidió no considerarlas para la construcción de modelos. Ésta decisión también está soportada con el estudio de las fichas técnicas de las diferentes generaciones de Mazda 2, ya que hay muchas variables que así sean faltantes tienen valores iguales como es el caso de tipo de combustible, tracción, vidrios, aire, aibag, audio, sun roof, motor y asientos.\\
+
+Analizando las nueve variables obligatorias se decidió eliminar las variables \textit{ciudad} y \textit{barrio} debido a que las ciudades capitales de los departamentos concentran más del 90\% del total de las ofertas del departamento. También se decidió eliminar la variable \textit{placa} ya que el campo aceptaba cualquier valor y en algunos casos teníamos la placa completa, en otros los últimos tres dígitos y en otros sólo un dígito.\\
+
+En conclusión, se seleccionaron 6 variables para analizar, éstas son:
+\begin{enumerate}
+\item Precio (variable continua positiva)
+\item Departamento (variable nominal)
+\item Modelo (variable discreta ordinal)
+\item Color (variable discreta nominal)
+\item Recorrido (variable continua)
+\item Transmisión (variable binomial)
+\end{enumerate}
+\subsubsection{Analisis descriptivo}
+\begin{itemize}
+\item Se eliminó un registro con recorrido 99999999
+\item Se eliminaron 7 registros con transmisión vacía
+\item Se eliminó uno con 800.000 km de recorrido del 2011
+\item Se eliminó uno con 520.000 km de recorrido del 2012
+\item Se eliminó uno con precio 0
+\end{itemize}
+
+En total 620 datos
+
+\subsection{Estimación de parámetros}
+Debido a que el objetivo es construir un modelo para determinar el precio del Mazda 2, procedemos a plantear inicialmente un modelo de regresión que considere el precio como una respuesta a las 5  variables restantes.
+\begin{equation}
+Y= \beta_0+\beta_{1,j}X_{1,j}+\beta_2X_2 +\beta_{3,i}X_{3,i}+\beta_4X_4+\beta_5I+\epsilon
+\end{equation}
+Donde:\\
+$X_{1,j}$ representa los departamentos de venta y está dado por:
+\begin{equation}
+X_{1,j} = \left\lbrace
+\begin{array}{ll}
+X_{1,1} = 1 & \verb!si ! X_{1,j} = \verb!antioquia!\\
+X_{1,2} = 2 & \verb!si !X_{1,j} = \verb!atlantico!\\
+X_{1,3} = 3 & \verb!si !X_{1,j} = \verb!bogota!\\
+X_{1,4} = 4 & \verb!si !X_{1,j} = \verb!bolivar!\\
+X_{1,5} = 5 & \verb!si !X_{1,j} = \verb!boyaca!\\
+X_{1,6} = 6 & \verb!si !X_{1,j} = \verb!caldas!\\
+X_{1,7} = 7 & \verb!si !X_{1,j} = \verb!casanare!\\
+X_{1,8} = 8 & \verb!si !X_{1,j} = \verb!cauca!\\
+X_{1,9} = 9 & \verb!si !X_{1,j} = \verb!cesar!\\
+X_{1,10} = 10 & \verb!si !X_{1,j} = \verb!cordoba!\\
+X_{1,11} = 11 & \verb!si !X_{1,j} = \verb!cundinamarca!\\
+X_{1,12} = 12 & \verb!si !X_{1,j} = \verb!huila!\\
+X_{1,13} = 13 & \verb!si !X_{1,j} = \verb!magdalena!\\
+X_{1,14} = 14 & \verb!si !X_{1,j} = \verb!meta!\\
+X_{1,15} = 15 & \verb!si !X_{1,j} = \verb!narino!\\
+X_{1,16} = 16 & \verb!si !X_{1,j} = \verb!norte_santander!\\
+X_{1,17} = 17 & \verb!si !X_{1,j} = \verb!quindio!\\
+X_{1,18} = 18 & \verb!si !X_{1,j} = \verb!risaralda!\\
+X_{1,19} = 19 & \verb!si !X_{1,j} = \verb!santander!\\
+X_{1,20} = 20 & \verb!si !X_{1,j} = \verb!tolima!\\
+0 & \verb!cualquier otro valor!\\
+\end{array}
+\right.
+\end{equation}
+$X_2$ representa el modelo y está dado por:
+\begin{equation}
+X_2\in{\lbrace 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018 \rbrace}
+\end{equation}
+$X_{3,i}$ representa el color del carro y está dado por:
+\begin{equation}
+X_{3,i} = \left\lbrace
+\begin{array}{ll}
+X_{3,1} = 1 & \verb!si ! X_{3,i} = \verb!azul!\\
+X_{3,2} = 2 & \verb!si !X_{3,i} = \verb!beige!\\
+X_{3,3} = 3 & \verb!si !X_{3,i} = \verb!blanco!\\
+X_{3,4} = 4 & \verb!si !X_{3,i} = \verb!dorado!\\
+X_{3,5} = 5 & \verb!si !X_{3,i} = \verb!gris!\\
+X_{3,6} = 6 & \verb!si !X_{3,i} = \verb!marron!\\
+X_{3,7} = 7 & \verb!si !X_{3,i} = \verb!negro!\\
+X_{3,8} = 8 & \verb!si !X_{3,i} = \verb!plateado!\\
+X_{3,9} = 9 & \verb!si !X_{3,i} = \verb!cesar!\\
+X_{3,10} = 10 & \verb!si !X_{3,i} = \verb!rojo!\\
+X_{3,11} = 11 & \verb!si !X_{3,i} = \verb!verde!\\
+X_{3,12} = 12 & \verb!si !X_{3,i} = \verb!vinotinto!\\
+0 & \verb!cualquier otro valor!\\
+\end{array}
+\right.
+\end{equation}
+$X_4$ representa los kilómetros recorridos y está dado por:
+\begin{equation}
+X_4\in{\lbrace 0 \to \infty \rbrace}
+\end{equation}
+$I$ representa el tipo de transmisión y está dado por:
+\begin{equation}
+I = \left\lbrace
+\begin{array}{ll}
+1 & \verb!si ! = \verb!automatica!\\
+0 & \verb!si ! = \verb!mecanica!\\
+\end{array}
+\right.
+\end{equation}
+y representa los errores del modelo, los cuales distribuyen normal con media cero y varianza conocida e independientes:
+\begin{equation}
+\epsilon \sim N(0, \sigma^2)
+\end{equation}
+De acuerdo al modelo anterior tenemos 36 parámetros a estimar.
+
+
+\section{Conclusiones}
+
+\bibliographystyle{alpha}
+\bibliography{sample}
+\end{document}

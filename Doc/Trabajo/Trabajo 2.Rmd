@@ -1,0 +1,179 @@
+---
+title: "Modelos Lineales"
+subtitle: "Función de Potencia de una Prueba"
+author: "Ana María López"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r load myData, include=FALSE}
+load(paste("D:/OneDrive - IGERENCIA S.A.S/Datos adjuntos/Igerencia/Personal/UNAL/Modelos Lineales/Mazda2/Solucion/myDataT2.RData"))
+```
+## Definición de la Prueba
+Sea $X_{1},X_{2},...,X_{n}$ independientes e identicamente distribuidas $\mathcal{N}(\mu,\sigma^2)$, con $\sigma^2$ conocida y $\mu$ desconocida. Se desea evaluar si $\mu=\mu_0$ para algunos valores $\mu_0$ especificos. Entonces las hipotesis nula y alternativa son: $$H_0: \mu=\mu_0, H_1: \mu\neq\mu_0$$
+Se desea construir la función de potencia de esta prueba para lo cual se calculara $1-\beta$, que indica la probabilidad de rechazar la hipotesis nula cuando debe de ser rechazada:$\\$
+
+|          |    |  Verdad   |  Verdad   |   |
+|----------|----|:--------: |---------  |---|
+|          |    | $H_0$     | $H_1$        |   |
+| Decisión | $H_0$ | 1-$\alpha$| $\beta$   |   |
+| Decisión | $H_1$ | $\alpha$  | 1-$\beta$ |   |
+Se define $\sigma^2=1$ y se construye una poblacion de tamaño $2500$ distribuida  $\mathcal{N}(0,1)$:
+```{r , include=TRUE}
+set.seed(123)
+Datos=2500
+sigma=1
+mu_0=0
+poblacion=rnorm(n,mu_0,sigma)
+n=100
+xn <- sample(poblacion,n,replace = TRUE)
+head(Xn)
+```
+Una prueba equivalente a una prueba de razón de verosimilitud puede basarse en $(\bar{X}-\mu_0)^2$, se tiene el resultado de que bajo la hipotesis mula el estadistico $\frac{n(\bar{X}-\mu_0)^2}{\sigma^2}$ es distribuido $\chi_1^2$, alternativamente, la raiz cuadrada de esta expresión $\frac{n^{1/2}(\bar{X}-\mu_0)}{\sigma}$ tiene una distribución normal estandar.
+Usando $\chi^2$ de el estadistico, la region critica sera valores excediendo un nivel critico $Z_c$, donde $Z_c$ es seleccionado como un nivel de significancia $\alpha$ que satisface $\chi^2_1(Z_c)=1-\alpha$.
+Vamos a tomar $\alpha=0.05$ tenemos:
+```{r , include=TRUE}
+alpha=0.05
+Zc <- qchisq(1-alpha,1)
+Zc
+```
+Entonces tenemos que $H_0$ rechaza cuando: $\\$
+1) $\frac{n(\bar{X}-\mu_0)}{\sigma^2}>Z_c=3.841459$
+```{r , include=FALSE}
+Zo <- n*(mean(Xn)-mu_0)^2/sd(Xn)
+Zo
+Rechazo <- Zo>Zc
+if(Rechazo){ print("Se Rechaza Hipotesis Nula") } else{ print("Se Acepta Hipotesis Nula") }
+```
+Considere el poder de la prueba del $\chi^2$ contra una alternativa tal como $\mu=\mu_1\neq\mu_0$. El parametro de no centralidad es:$\\$
+2) $\delta=n(\mu_1-\mu_0)^2/\sigma^2$ $\\$
+Para el ejemplo trabajado, se desea entonces calcular el poder que tiene la prueba si se varia el valor de $\mu_1$, sabemos que $\mu_0=0$ ya que la muestra fue construida con esta definición por lo cual vamos a simular diferentes valores de $\mu_1$ cercanos a $0$, para un nivel de significancia $\alpha=0.05$, nuestra grafica de potencia es:
+```{r , fig.width=6, fig.height=3.5, fig.align='center', echo=FALSE}
+mu_1 <- -1
+i <- 1
+pi <- NA
+mu <- NA
+while (mu_1<=1){
+  delta=n*(mu_1-mu_0)^2/sd(Xn)
+  mu[i] <- mu_1
+  pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+  i <- i + 1
+  mu_1 <- mu_1 + 0.01
+}
+plot(mu,pi,type = "l", col = "blue", xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+legend('bottomright', legend = c('alpha=0.05,n=100'), lwd = 2, col = c('blue'))
+```
+Ahora se desea validar que sucede con la curva de potencia con diferentes tamaños de muestra:
+```{r , fig.width=6, fig.height=3.5, fig.align='center', echo=FALSE}
+  alpha=0.05
+  Zc <- qchisq(1-alpha,1)
+  
+  n=100
+  xn <- sample(poblacion,n,replace = TRUE)
+
+  mu_1 <- -1
+  i <- 1
+  pi <- NA
+  mu <- NA
+  while (mu_1<=1){
+    delta=n*(mu_1-mu_0)^2/sd(Xn)
+    mu[i] <- mu_1
+    pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+    i <- i + 1
+    mu_1 <- mu_1 + 0.01
+  }
+  plot(mu,pi,type = "l", col = "blue", xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  axis(side=2, at=seq(0, 1, by=0.2))
+  
+  n=1000
+  xn <- sample(poblacion,n,replace = TRUE)
+  
+  mu_1 <- -1
+  i <- 1
+  pi <- NA
+  mu <- NA
+  while (mu_1<=1){
+    delta=n*(mu_1-mu_0)^2/sd(Xn)
+    mu[i] <- mu_1
+    pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+    i <- i + 1
+    mu_1 <- mu_1 + 0.01
+  }
+  par(new=TRUE)
+  plot(mu,pi,type = "l", col = "magenta", axes = FALSE, xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  
+  n=2000
+  xn <- sample(poblacion,n,replace = TRUE)
+  
+  mu_1 <- -1
+  i <- 1
+  pi <- NA
+  mu <- NA
+  while (mu_1<=1){
+    delta=n*(mu_1-mu_0)^2/sd(Xn)
+    mu[i] <- mu_1
+    pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+    i <- i + 1
+    mu_1 <- mu_1 + 0.01
+  }
+  par(new=TRUE)
+  plot(mu,pi,type = "l", col = "firebrick3", axes = FALSE, xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  legend('bottomright', legend = c('n=100','n=1000','n=2000'), lwd = 2, col = c('blue', 'magenta', 'firebrick3'))
+```
+Para este grafico de potencia con el mismo nivel de significancia $\alpha=0.05$ con diferentes tamaños de muestra: $n=100, n=1000, n=2000$, encontramos que a medida de que la muestra es más grande, la probabilidad de rechazar la hipotesis nula cuando debe ser rechazada es mayor.
+```{r , fig.width=6, fig.height=4, fig.align='center', include=FALSE}
+##Ahora miremos el mismo grafico de potencia para diferentes niveles de significancia:
+  alpha=0.25
+  Zc <- qchisq(1-alpha,1)
+  mu_1 <- -1
+i <- 1
+pi <- NA
+mu <- NA
+while (mu_1<=1){
+  delta=n*(mu_1-mu_0)^2/sd(Xn)
+  mu[i] <- mu_1
+  pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+  i <- i + 1
+  mu_1 <- mu_1 + 0.01
+}
+
+  plot(mu,pi,type = "l", col = "blue", xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  axis(side=2, at=seq(0, 1, by=0.2))
+  
+  alpha <- alpha - 0.1
+  Zc <- qchisq(1-alpha,1)
+  mu_1 <- -1
+i <- 1
+pi <- NA
+mu <- NA
+while (mu_1<=1){
+  delta=n*(mu_1-mu_0)^2/sd(Xn)
+  mu[i] <- mu_1
+  pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+  i <- i + 1
+  mu_1 <- mu_1 + 0.01
+}
+
+  par(new=TRUE)
+  plot(mu,pi,type = "l", col = "magenta", axes = FALSE, xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  
+  alpha <- alpha - 0.1
+  Zc <- qchisq(1-alpha,1)
+  mu_1 <- -1
+i <- 1
+pi <- NA
+mu <- NA
+while (mu_1<=1){
+  delta=n*(mu_1-mu_0)^2/sd(Xn)
+  mu[i] <- mu_1
+  pi[i] <- 1-pchisq(Zc, 1, ncp=delta)
+  i <- i + 1
+  mu_1 <- mu_1 + 0.01
+}
+  
+  par(new=TRUE)
+  plot(mu,pi,type = "l", col = "firebrick3", axes = FALSE, xlab = "Mu", ylab = "Potencia", main = 'Curva de Potencia')
+  legend('bottomright', legend = c('alpha=0.25','alpha=0.15','alpha=0.05'), lwd = 2, col = c('blue', 'magenta', 'firebrick3'))
+  ##A medida de que el nivel de significancia aumenta, tambien aumenta la probabilidad de rechazar la ##hipotesis nula cuando debe ser rechazada.
+```
