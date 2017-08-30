@@ -129,12 +129,22 @@ for (col in colnames){
 }
 
 fecha <- format(Sys.Date(),"%Y%m%d")
+
 write.table(descriptivo, 
             paste(dir.output,"Descriptivo_Mazda2_",fecha,'.csv',sep=''),
             sep="|", col.names=TRUE, row.names=FALSE, quote=TRUE, na="",dec=',',fileEncoding = "UTF-8")
 
 
+#(mazda2, 
+#            paste(dir.output,"DatosFA_Mazda2_",fecha,'.csv',sep=''),
+#            sep="|", col.names=TRUE, row.names=FALSE, quote=TRUE, na="",dec=',',fileEncoding = "ASCII")
+
+write.table(mazda2, 
+            paste(dir.output,"DatosFU_Mazda2_",fecha,'.csv',sep=''),
+            sep="|", col.names=TRUE, row.names=FALSE, quote=TRUE, na="",dec=',',fileEncoding = "UTF-8")
+
 #unique(mazda2$Ubicacion)
+
 
 
 
